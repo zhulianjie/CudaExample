@@ -1,4 +1,7 @@
-#include <sys/time.h>
+
+#define WIN32_LEAN_AND_MEAN
+
+#include <chrono>
 
 #ifndef _COMMON_H
 #define _COMMON_H
@@ -66,10 +69,7 @@
 
 inline double seconds()
 {
-    struct timeval tp;
-    struct timezone tzp;
-    int i = gettimeofday(&tp, &tzp);
-    return ((double)tp.tv_sec + (double)tp.tv_usec * 1.e-6);
+    return std::chrono::high_resolution_clock::now().time_since_epoch().count();
 }
 
 #endif // _COMMON_H
